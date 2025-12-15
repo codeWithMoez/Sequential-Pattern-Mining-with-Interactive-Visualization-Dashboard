@@ -219,7 +219,7 @@ class VisualizationDataGenerator:
                 'avg_pattern_length': 0,
                 'max_support': 0,
                 'execution_time': execution_time,
-                'min_support': min_support
+                'min_support_threshold': min_support
             }
         
         pattern_lengths = [p['length'] for p in self.patterns]

@@ -26,38 +26,143 @@ st.set_page_config(
 # Custom CSS for better styling
 st.markdown("""
 <style>
+    /* Main header styling */
     .main-header {
-        font-size: 3rem;
-        font-weight: bold;
-        color: #1f77b4;
+        font-size: 3.5rem;
+        font-weight: 800;
+        background: linear-gradient(120deg, #1f77b4 0%, #2ca02c 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
         text-align: center;
-        padding: 1rem 0;
+        padding: 1.5rem 0;
+        margin-bottom: 0.5rem;
     }
+    
     .sub-header {
-        font-size: 1.2rem;
-        color: #666;
+        font-size: 1.3rem;
+        color: #555;
         text-align: center;
         padding-bottom: 2rem;
+        font-weight: 300;
     }
+    
+    /* Tab styling */
     .stTabs [data-baseweb="tab-list"] {
-        gap: 2rem;
+        gap: 1rem;
+        background-color: #f8f9fa;
+        padding: 0.5rem;
+        border-radius: 10px;
     }
+    
     .stTabs [data-baseweb="tab"] {
         padding: 1rem 2rem;
+        background-color: white;
+        border-radius: 8px;
+        font-weight: 600;
+        transition: all 0.3s ease;
     }
+    
+    .stTabs [data-baseweb="tab"]:hover {
+        background-color: #e8f4f8;
+        transform: translateY(-2px);
+    }
+    
+    .stTabs [aria-selected="true"] {
+        background: linear-gradient(120deg, #1f77b4 0%, #2ca02c 100%) !important;
+        color: white !important;
+    }
+    
+    /* Metric container styling */
     div[data-testid="metric-container"] {
-        background-color: #f0f2f6;
-        border: 1px solid #e0e0e0;
-        padding: 1rem;
-        border-radius: 0.5rem;
-        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        border: none;
+        padding: 1.5rem;
+        border-radius: 12px;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        transition: transform 0.3s ease;
     }
+    
+    div[data-testid="metric-container"]:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+    }
+    
+    div[data-testid="metric-container"] label {
+        color: rgba(255,255,255,0.9) !important;
+        font-weight: 600 !important;
+    }
+    
+    div[data-testid="metric-container"] [data-testid="stMetricValue"] {
+        color: white !important;
+        font-size: 2rem !important;
+        font-weight: 700 !important;
+    }
+    
+    /* Button styling */
+    .stButton > button {
+        background: linear-gradient(120deg, #1f77b4 0%, #2ca02c 100%);
+        color: white;
+        border: none;
+        padding: 0.75rem 2rem;
+        border-radius: 8px;
+        font-weight: 600;
+        font-size: 1rem;
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+    
+    .stButton > button:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 15px rgba(0,0,0,0.2);
+    }
+    
+    /* Progress indicators */
+    .stProgress > div > div {
+        background: linear-gradient(120deg, #1f77b4 0%, #2ca02c 100%);
+    }
+    
+    /* Section separators */
+    hr {
+        margin: 2rem 0;
+        border: none;
+        height: 2px;
+        background: linear-gradient(90deg, transparent, #1f77b4, transparent);
+    }
+    
+    /* Expander styling */
+    .streamlit-expanderHeader {
+        background-color: #f8f9fa;
+        border-radius: 8px;
+        font-weight: 600;
+    }
+    
+    /* Sidebar styling */
+    section[data-testid="stSidebar"] {
+        background: linear-gradient(180deg, #f8f9fa 0%, #e9ecef 100%);
+    }
+    
+    /* File uploader styling */
+    [data-testid="stFileUploader"] {
+        background-color: #f8f9fa;
+        border: 2px dashed #1f77b4;
+        border-radius: 10px;
+        padding: 2rem;
+    }
+    
+    /* Success/Error boxes */
     .success-box {
         padding: 1rem;
-        background-color: #d4edda;
-        border: 1px solid #c3e6cb;
-        border-radius: 0.5rem;
+        background: linear-gradient(135deg, #d4edda 0%, #c3e6cb 100%);
+        border-left: 4px solid #28a745;
+        border-radius: 8px;
         color: #155724;
+        font-weight: 500;
+    }
+    
+    .stAlert {
+        border-radius: 8px;
+        border-left-width: 4px;
     }
 </style>
 """, unsafe_allow_html=True)
@@ -147,19 +252,6 @@ def render_sidebar():
             st.warning("Start backend: `python backend/main.py`")
         
         st.markdown("---")
-        
-        # Additional info
-        st.markdown("### 📚 Resources")
-        st.markdown("""
-        - [Documentation](#)
-        - [GitHub Repository](#)
-        - [Report Issue](#)
-        """)
-        
-        st.markdown("---")
-        st.markdown("### 👨‍💻 Developer")
-        st.markdown("**University Final Year Project**")
-        st.markdown("*Sequential Pattern Mining*")
 
 
 def main():
@@ -234,8 +326,8 @@ def main():
     # Footer
     st.markdown("---")
     st.markdown("""
-    <div style='text-align: center; color: #666; padding: 2rem 0;'>
-        <p>⛏️ Sequential Pattern Mining Dashboard | Built with Streamlit & FastAPI | © 2023</p>
+    <div style='text-align: center; color: #888; padding: 2rem 0;'>
+        <p style='font-size: 0.9rem; font-weight: 300;'>⛏️ Sequential Pattern Mining Dashboard | Built with Streamlit & FastAPI</p>
     </div>
     """, unsafe_allow_html=True)
 
